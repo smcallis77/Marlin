@@ -48,7 +48,10 @@
 //
 #define X_STOP_PIN                          PC0   // "X-STOP"
 #define Y_STOP_PIN                          PC1   // "Y-STOP"
-#define Z_STOP_PIN                          PC2   // "Z-STOP"
+// Modified by Steve
+// change the pin for Z_Stop_PIN from the ZStop plug to the Probe plug to allow config of BLTouch
+// for this change to be effective 'Z_STOP uses Probe' must be configured in this file
+#define Z_STOP_PIN                          PC14   // "Z-STOP"
 
 //
 // Z Probe must be this pin
