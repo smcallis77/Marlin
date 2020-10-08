@@ -1141,7 +1141,7 @@
 #define LED_USER_PRESET_GREEN 128      // User defined GREEN value
 #define LED_USER_PRESET_BLUE 0         // User defined BLUE value
 #define LED_USER_PRESET_WHITE 255      // User defined WHITE value
-#define LED_USER_PRESET_BRIGHTNESS 255 // User defined intensity
+#define LED_USER_PRESET_BRIGHTNESS 255 // User defined intensity \
                                        //#define LED_USER_PRESET_STARTUP       // Have the printer display the user preset color on startup
 #endif
 #if ENABLED(NEO2_COLOR_PRESETS)
@@ -1149,7 +1149,7 @@
 #define NEO2_USER_PRESET_GREEN 128      // User defined GREEN value
 #define NEO2_USER_PRESET_BLUE 0         // User defined BLUE value
 #define NEO2_USER_PRESET_WHITE 255      // User defined WHITE value
-#define NEO2_USER_PRESET_BRIGHTNESS 255 // User defined intensity
+#define NEO2_USER_PRESET_BRIGHTNESS 255 // User defined intensity \
                                         //#define NEO2_USER_PRESET_STARTUP       // Have the printer display the user preset color on startup for the second strip
 #endif
 #endif
@@ -1191,8 +1191,8 @@
 #if ENABLED(LCD_PROGRESS_BAR)
 #define PROGRESS_BAR_BAR_TIME 2000 // (ms) Amount of time to show the bar
 #define PROGRESS_BAR_MSG_TIME 3000 // (ms) Amount of time to show the status message
-#define PROGRESS_MSG_EXPIRE 0      // (ms) Amount of time to retain the status message (0=forever)
-                                   //#define PROGRESS_MSG_ONCE         // Show the message for MSG_TIME then clear it
+#define PROGRESS_MSG_EXPIRE 0      // (ms) Amount of time to retain the status message (0=forever)                    \
+                                   //#define PROGRESS_MSG_ONCE         // Show the message for MSG_TIME then clear it \
                                    //#define LCD_PROGRESS_BAR_TEST     // Add a menu item to test the progress bar
 #endif
 #endif
@@ -1282,7 +1282,7 @@
 #define SDSORT_GCODE false       // Allow turning sorting on/off with LCD and M34 G-code.
 #define SDSORT_USES_RAM false    // Pre-allocate a static array for faster pre-sorting.
 #define SDSORT_USES_STACK false  // Prefer the stack for pre-sorting to give back some SRAM. (Negated by next 2 options.)
-#define SDSORT_CACHE_NAMES true  // Keep sorted items in RAM longer for speedy performance. Most expensive option.
+#define SDSORT_CACHE_NAMES false // Keep sorted items in RAM longer for speedy performance. Most expensive option.
 #define SDSORT_DYNAMIC_RAM false // Use dynamic allocation (within SD menus). Least expensive option. Set SDSORT_LIMIT before use!
 #define SDSORT_CACHE_VFATS 2     // Maximum number of 13-byte VFAT entries to use for sorting. \
                                  // Note: Only affects SCROLL_LONG_FILENAMES with SDSORT_CACHE_NAMES but not SDSORT_DYNAMIC_RAM.
@@ -1842,9 +1842,9 @@
 //#define ARC_SEGMENTS_PER_R    1 // Max segment length, MM_PER = Min
 #define MIN_ARC_SEGMENTS 24 // Minimum number of segments in a complete circle
 //#define ARC_SEGMENTS_PER_SEC 50 // Use feedrate to choose segment length (with MM_PER_ARC_SEGMENT as the minimum)
-#define N_ARC_CORRECTION 25 // Number of interpolated segments between corrections
-                            //#define ARC_P_CIRCLES           // Enable the 'P' parameter to specify complete circles
-                            //#define CNC_WORKSPACE_PLANES    // Allow G2/G3 to operate in XY, ZX, or YZ planes
+#define N_ARC_CORRECTION 25 // Number of interpolated segments between corrections                                    \
+                            //#define ARC_P_CIRCLES           // Enable the 'P' parameter to specify complete circles \
+                            //#define CNC_WORKSPACE_PLANES    // Allow G2/G3 to operate in XY, ZX, or YZ planes       \
                             //#define SF_ARC_FIX              // Enable only if using SkeinForge with "Arc Point" fillet procedure
 #endif
 
@@ -2119,8 +2119,8 @@
    {                                 \
       X_MIN_POS + 10, Y_MIN_POS + 10 \
    }
-#define TOOLCHANGE_PARK_XY_FEEDRATE 6000 // (mm/min)
-                                         //#define TOOLCHANGE_PARK_X_ONLY          // X axis only move
+#define TOOLCHANGE_PARK_XY_FEEDRATE 6000 // (mm/min)                                                   \
+                                         //#define TOOLCHANGE_PARK_X_ONLY          // X axis only move \
                                          //#define TOOLCHANGE_PARK_Y_ONLY          // Y axis only move
 #endif
 #endif // HAS_MULTI_EXTRUDER
