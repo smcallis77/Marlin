@@ -131,7 +131,7 @@
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "SKR-BL 512K 091020"
+#define CUSTOM_MACHINE_NAME "SKR-BL 512K 231020"
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
@@ -766,7 +766,7 @@
  */
 #define DEFAULT_AXIS_STEPS_PER_UNIT \
   {                                 \
-    80, 80, 400, 101.75             \
+    80, 80, 400, 104.38             \
   }
 
 /**
@@ -1029,7 +1029,7 @@
  */
 #define NOZZLE_TO_PROBE_OFFSET \
   {                            \
-    -46, -6, 0                 \
+    -60, -13, -1.38            \
   }
 
 // Most probes should stay away from the edges of the bed, but
@@ -1166,7 +1166,7 @@
 // @section machine
 
 // The size of the print bed
-#define X_BED_SIZE 235
+#define X_BED_SIZE 230
 #define Y_BED_SIZE 235
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
@@ -1420,7 +1420,7 @@
 // Manually set the home position. Leave these undefined for automatic settings.
 // For DELTA this is the top-center of the Cartesian print volume.
 //#define MANUAL_X_HOME_POS 0
-//#define MANUAL_Y_HOME_POS 0
+#define MANUAL_Y_HOME_POS -9
 //#define MANUAL_Z_HOME_POS 0
 
 // Use "Z Safe Homing" to avoid homing with a Z probe outside the bed area.
