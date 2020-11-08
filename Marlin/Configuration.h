@@ -132,7 +132,7 @@
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "SKR-BL 512K 311020"
+#define CUSTOM_MACHINE_NAME "SKR-BL 512K 071120"
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
@@ -344,19 +344,19 @@
  * Enable and connect the power supply to the PS_ON_PIN.
  * Specify whether the power supply is active HIGH or active LOW.
  */
-//#define PSU_CONTROL
+#define PSU_CONTROL
 //#define PSU_NAME "Power Supply"
 
 #if ENABLED(PSU_CONTROL)
 #define PSU_ACTIVE_STATE LOW // Set 'LOW' for ATX, 'HIGH' for X-Box
 
-//#define PSU_DEFAULT_OFF         // Keep power off until enabled directly with M80
-//#define PSU_POWERUP_DELAY 250   // (ms) Delay for the PSU to warm up to full power
+#define PSU_DEFAULT_OFF       // Keep power off until enabled directly with M80
+#define PSU_POWERUP_DELAY 250 // (ms) Delay for the PSU to warm up to full power
 
 //#define PSU_POWERUP_GCODE  "M355 S1"  // G-code to run after power-on (e.g., case light on)
 //#define PSU_POWEROFF_GCODE "M355 S0"  // G-code to run before power-off (e.g., case light off)
 
-//#define AUTO_POWER_CONTROL      // Enable automatic control of the PS_ON pin
+#define AUTO_POWER_CONTROL // Enable automatic control of the PS_ON pin
 #if ENABLED(AUTO_POWER_CONTROL)
 #define AUTO_POWER_FANS // Turn on PSU if fans need power
 #define AUTO_POWER_E_FANS
