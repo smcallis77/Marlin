@@ -823,7 +823,9 @@
 
 #define RESTORE_LEVELING_AFTER_G35 // Enable to restore leveling setup after operation
                                    //#define REPORT_TRAMMING_MM          // Report Z deviation (mm) for each point relative to the first
-                                   //#define ASSISTED_TRAMMING_MENU_ITEM // Add a menu item for Assisted Tramming
+
+//#define ASSISTED_TRAMMING_MENU_ITEM // Add a menu item to run G35 Assisted Tramming (MarlinUI)
+//#define ASSISTED_TRAMMING_WIZARD    // Make the menu item open a Tramming Wizard sub-menu
 
 /**
    * Screw thread:
@@ -2321,7 +2323,7 @@
 #define X_CURRENT_HOME X_CURRENT // (mA) RMS current for sensorless homing
 #define X_MICROSTEPS 16          // 0..256
 #define X_RSENSE 0.11
-#define X_CHAIN_POS -1 // -1..0: Not chained. 1: MCU MOSI connected. 2: Next in chain, ...
+#define X_CHAIN_POS -1 // -1..0: Not chained. 1: MCU MOSI connected. 2: Next in chain, ... \
                        //#define X_INTERPOLATE  true      // Enable to override 'INTERPOLATE' for the X axis
 #endif
 
@@ -2543,22 +2545,22 @@
    * Define your own with:
    * { <off_time[1..15]>, <hysteresis_end[-3..12]>, hysteresis_start[1..8] }
    */
-#define CHOPPER_TIMING CHOPPER_DEFAULT_12V // All axes (override below)
-                                           //#define CHOPPER_TIMING_X  CHOPPER_DEFAULT_12V   // For X Axes (override below)
-                                           //#define CHOPPER_TIMING_X2 CHOPPER_DEFAULT_12V
-                                           //#define CHOPPER_TIMING_Y  CHOPPER_DEFAULT_12V   // For Y Axes (override below)
-                                           //#define CHOPPER_TIMING_Y2 CHOPPER_DEFAULT_12V
-                                           //#define CHOPPER_TIMING_Z  CHOPPER_DEFAULT_12V   // For Z Axes (override below)
-                                           //#define CHOPPER_TIMING_Z2 CHOPPER_DEFAULT_12V
-                                           //#define CHOPPER_TIMING_Z3 CHOPPER_DEFAULT_12V
-                                           //#define CHOPPER_TIMING_Z4 CHOPPER_DEFAULT_12V
-                                           //#define CHOPPER_TIMING_E  CHOPPER_DEFAULT_12V   // For Extruders (override below)
-                                           //#define CHOPPER_TIMING_E1 CHOPPER_DEFAULT_12V
-                                           //#define CHOPPER_TIMING_E2 CHOPPER_DEFAULT_12V
-                                           //#define CHOPPER_TIMING_E3 CHOPPER_DEFAULT_12V
-                                           //#define CHOPPER_TIMING_E4 CHOPPER_DEFAULT_12V
-                                           //#define CHOPPER_TIMING_E5 CHOPPER_DEFAULT_12V
-                                           //#define CHOPPER_TIMING_E6 CHOPPER_DEFAULT_12V
+#define CHOPPER_TIMING CHOPPER_DEFAULT_12V // All axes (override below)                                                        \
+                                           //#define CHOPPER_TIMING_X  CHOPPER_DEFAULT_12V   // For X Axes (override below)    \
+                                           //#define CHOPPER_TIMING_X2 CHOPPER_DEFAULT_12V                                     \
+                                           //#define CHOPPER_TIMING_Y  CHOPPER_DEFAULT_12V   // For Y Axes (override below)    \
+                                           //#define CHOPPER_TIMING_Y2 CHOPPER_DEFAULT_12V                                     \
+                                           //#define CHOPPER_TIMING_Z  CHOPPER_DEFAULT_12V   // For Z Axes (override below)    \
+                                           //#define CHOPPER_TIMING_Z2 CHOPPER_DEFAULT_12V                                     \
+                                           //#define CHOPPER_TIMING_Z3 CHOPPER_DEFAULT_12V                                     \
+                                           //#define CHOPPER_TIMING_Z4 CHOPPER_DEFAULT_12V                                     \
+                                           //#define CHOPPER_TIMING_E  CHOPPER_DEFAULT_12V   // For Extruders (override below) \
+                                           //#define CHOPPER_TIMING_E1 CHOPPER_DEFAULT_12V                                     \
+                                           //#define CHOPPER_TIMING_E2 CHOPPER_DEFAULT_12V                                     \
+                                           //#define CHOPPER_TIMING_E3 CHOPPER_DEFAULT_12V                                     \
+                                           //#define CHOPPER_TIMING_E4 CHOPPER_DEFAULT_12V                                     \
+                                           //#define CHOPPER_TIMING_E5 CHOPPER_DEFAULT_12V                                     \
+                                           //#define CHOPPER_TIMING_E6 CHOPPER_DEFAULT_12V                                     \
                                            //#define CHOPPER_TIMING_E7 CHOPPER_DEFAULT_12V
 
 /**
@@ -2990,11 +2992,18 @@
 
 #define SPINDLE_LASER_FREQUENCY 2500 // (Hz) Spindle/laser frequency (only on supported HALs: AVR and LPC)
 
+//#define SPINDLE_SERVO         // A servo converting an angle to spindle power
+#ifdef SPINDLE_SERVO
+#define SPINDLE_SERVO_NR 0   // Index of servo used for spindle control
+#define SPINDLE_SERVO_MIN 10 // Minimum angle for servo spindle
+#endif
+
 /**
    * Speed / Power can be set ('M3 S') and displayed in terms of:
    *  - PWM255  (S0 - S255)
    *  - PERCENT (S0 - S100)
    *  - RPM     (S0 - S50000)  Best for use with a spindle
+   *  - SERVO   (S0 - S180)
    */
 #define CUTTER_POWER_UNIT PWM255
 
