@@ -70,7 +70,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(BIGTREETECH, SKR-mini-E3-V1.2)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(BIGTREETECH, SKR-mini-E3-V2.0)" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 /**
@@ -107,9 +107,8 @@
 
 /**
  * Select a secondary serial port on the board to use for communication with the host.
- * Currently Ethernet (-2) is only supported on Teensy 4.1 boards.
- * :[-2, -1, 0, 1, 2, 3, 4, 5, 6, 7]
- */
+ * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
+*/
 #define SERIAL_PORT_2 -1
 
 /**
@@ -128,11 +127,11 @@
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-#define MOTHERBOARD BOARD_BTT_SKR_MINI_E3_V1_2
+#define MOTHERBOARD BOARD_BTT_SKR_MINI_E3_V2_0
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "SKR-BL 512K 071120"
+#define CUSTOM_MACHINE_NAME "SKR-BL V2.0 512K 091120"
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
@@ -353,9 +352,6 @@
 #define PSU_DEFAULT_OFF       // Keep power off until enabled directly with M80
 #define PSU_POWERUP_DELAY 250 // (ms) Delay for the PSU to warm up to full power
 
-//#define PSU_POWERUP_GCODE  "M355 S1"  // G-code to run after power-on (e.g., case light on)
-//#define PSU_POWEROFF_GCODE "M355 S0"  // G-code to run before power-off (e.g., case light off)
-
 #define AUTO_POWER_CONTROL // Enable automatic control of the PS_ON pin
 #if ENABLED(AUTO_POWER_CONTROL)
 #define AUTO_POWER_FANS // Turn on PSU if fans need power
@@ -454,12 +450,6 @@
 #define DUMMY_THERMISTOR_998_VALUE 25
 #define DUMMY_THERMISTOR_999_VALUE 100
 
-// Resistor values when using a MAX31865 (sensor -5)
-// Sensor value is typically 100 (PT100) or 1000 (PT1000)
-// Calibration value is typically 430 ohm for AdaFruit PT100 modules and 4300 ohm for AdaFruit PT1000 modules.
-//#define MAX31865_SENSOR_OHMS      100
-//#define MAX31865_CALIBRATION_OHMS 430
-
 // Use temp sensor 1 as a redundant sensor with sensor 0. If the readings
 // from the two sensors differ too much the print will be aborted.
 //#define TEMP_SENSOR_1_AS_REDUNDANT
@@ -515,27 +505,27 @@
 //#define PID_PARAMS_PER_HOTEND // Uses separate PID parameters for each extruder (useful for mismatched extruders)
 // Set/get with gcode: M301 E[extruder number, 0-2]
 
-// If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
-// Creality Ender-3
+// Creality Ender-3 Pro
+#if ENABLED(PID_PARAMS_PER_HOTEND)
+// Specify between 1 and HOTENDS values per array.
+// If fewer than EXTRUDER values are provided, the last element will be repeated.
+#define DEFAULT_Kp_LIST \
+  {                     \
+    21.73, 21.73        \
+  }
+#define DEFAULT_Ki_LIST \
+  {                     \
+    1.54, 1.54          \
+  }
+#define DEFAULT_Kd_LIST \
+  {                     \
+    76.55, 76.55        \
+  }
+#else
 #define DEFAULT_Kp 21.73
 #define DEFAULT_Ki 1.54
 #define DEFAULT_Kd 76.55
-
-// Ultimaker
-//#define DEFAULT_Kp 22.2
-//#define DEFAULT_Ki 1.08
-//#define DEFAULT_Kd 114
-
-// MakerGear
-//#define DEFAULT_Kp 7.0
-//#define DEFAULT_Ki 0.1
-//#define DEFAULT_Kd 12
-
-// Mendel Parts V9 on 12V
-//#define DEFAULT_Kp 63.0
-//#define DEFAULT_Ki 2.25
-//#define DEFAULT_Kd 440
-
+#endif
 #endif // PIDTEMP
 
 //===========================================================================
@@ -571,11 +561,10 @@
 //#define MIN_BED_POWER 0
 //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-// 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
-// from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-#define DEFAULT_bedKp 10.00
-#define DEFAULT_bedKi .023
-#define DEFAULT_bedKd 305.4
+// Creality Ender-3 Pro
+#define DEFAULT_bedKp 50.71
+#define DEFAULT_bedKi 9.88
+#define DEFAULT_bedKd 173.43
 
 // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
@@ -732,7 +721,7 @@
 
 // Enable this feature if all enabled endstop pins are interrupt-capable.
 // This will remove the need to poll the interrupt pins, saving many CPU cycles.
-#define ENDSTOP_INTERRUPTS_FEATURE
+//#define ENDSTOP_INTERRUPTS_FEATURE
 
 /**
  * Endstop Noise Threshold
@@ -865,9 +854,9 @@
  *   https://blog.kyneticcnc.com/2018/10/computing-junction-deviation-for-marlin.html
  */
 #if DISABLED(CLASSIC_JERK)
-#define JUNCTION_DEVIATION_MM 0.013 // (mm) Distance from real junction edge
-#define JD_HANDLE_SMALL_SEGMENTS    // Use curvature estimation instead of just the junction angle \
-                                    // for small segments (< 1mm) with large junction angles (> 135°).
+#define JUNCTION_DEVIATION_MM 0.08 // (mm) Distance from real junction edge
+#define JD_HANDLE_SMALL_SEGMENTS   // Use curvature estimation instead of just the junction angle \
+                                   // for small segments (< 1mm) with large junction angles (> 135°).
 #endif
 
 /**
@@ -1221,12 +1210,6 @@
 /**
  * Filament Runout Sensors
  * Mechanical or opto endstops are used to check for the presence of filament.
- *
- * IMPORTANT: Runout will only trigger if Marlin is aware that a print job is running.
- * Marlin knows a print job is running when:
- *  1. Running a print job from media started with M24.
- *  2. The Print Job Timer has been started with M75.
- *  3. The heaters were turned on and PRINTJOB_TIMER_AUTOSTART is enabled.
  *
  * RAMPS-based boards use SERVO3_PIN for the first runout sensor.
  * For other boards you may need to define FIL_RUNOUT_PIN, FIL_RUNOUT2_PIN, etc.
@@ -1819,7 +1802,7 @@
  *
  * Use CRC checks and retries on the SD communication.
  */
-#define SD_CHECK_AND_RETRY
+//#define SD_CHECK_AND_RETRY
 
 /**
  * LCD Menu Items
@@ -2161,10 +2144,9 @@
 //
 // Anet 128x64 full graphics lcd with rotary encoder as used on Anet A6
 // A clone of the RepRapDiscount full graphics display but with
-// different pins/wiring (see pins_ANET_10.h). Enable one of these.
+// different pins/wiring (see pins_ANET_10.h).
 //
 //#define ANET_FULL_GRAPHICS_LCD
-//#define ANET_FULL_GRAPHICS_LCD_ALT_WIRING
 
 //
 // AZSMZ 12864 LCD with SD
@@ -2271,7 +2253,7 @@
 
 //
 // Third-party or vendor-customized controller interfaces.
-// Sources should be installed in 'src/lcd/extui'.
+// Sources should be installed in 'src/lcd/extensible_ui'.
 //
 //#define EXTENSIBLE_UI
 
@@ -2283,108 +2265,43 @@
 //=============================== Graphical TFTs ==============================
 //=============================================================================
 
-/**
- * Specific TFT Model Presets. Enable one of the following options
- * or enable TFT_GENERIC and set sub-options.
- */
+//
+// TFT display with optional touch screen
+// Color Marlin UI with standard menu system
+//
+//#define TFT_320x240
+//#define TFT_320x240_SPI
+//#define TFT_480x320
+//#define TFT_480x320_SPI
 
 //
-// 480x320, 3.5", SPI Display From MKS
-// Normally used in MKS Robin Nano V2
+// Skip autodetect and force specific TFT driver
+// Mandatory for SPI screens with no MISO line
+// Available drivers are: ST7735, ST7789, ST7796, R61505, ILI9328, ILI9341, ILI9488
 //
-//#define MKS_TS35_V2_0
+//#define TFT_DRIVER AUTO
 
 //
-// 320x240, 2.4", FSMC Display From MKS
-// Normally used in MKS Robin Nano V1.2
+// SPI display (MKS Robin Nano V2.0, MKS Gen L V2.0)
+// Upscaled 128x64 Marlin UI
 //
-//#define MKS_ROBIN_TFT24
+//#define SPI_GRAPHICAL_TFT
 
 //
-// 320x240, 2.8", FSMC Display From MKS
-// Normally used in MKS Robin Nano V1.2
+// FSMC display (MKS Robin, Alfawise U20, JGAurora A5S, REXYZ A1, etc.)
+// Upscaled 128x64 Marlin UI
 //
-//#define MKS_ROBIN_TFT28
+//#define FSMC_GRAPHICAL_TFT
 
 //
-// 320x240, 3.2", FSMC Display From MKS
-// Normally used in MKS Robin Nano V1.2
+// TFT LVGL UI
 //
-//#define MKS_ROBIN_TFT32
-
+// Using default MKS icons and fonts from: https://git.io/JJvzK
+// Just copy the 'assets' folder from the build directory to the
+// root of your SD card, together with the compiled firmware.
 //
-// 480x320, 3.5", FSMC Display From MKS
-// Normally used in MKS Robin Nano V1.2
-//
-//#define MKS_ROBIN_TFT35
-
-//
-// 480x272, 4.3", FSMC Display From MKS
-//
-//#define MKS_ROBIN_TFT43
-
-//
-// 320x240, 3.2", FSMC Display From MKS
-// Normally used in MKS Robin
-//
-//#define MKS_ROBIN_TFT_V1_1R
-
-//
-// 480x320, 3.5", FSMC Stock Display from TronxXY
-//
-//#define TFT_TRONXY_X5SA
-
-//
-// 480x320, 3.5", FSMC Stock Display from AnyCubic
-//
-//#define ANYCUBIC_TFT35
-
-//
-// 320x240, 2.8", FSMC Stock Display from Longer/Alfawise
-//
-//#define LONGER_LK_TFT28
-
-//
-// Generic TFT with detailed options
-//
-//#define TFT_GENERIC
-#if ENABLED(TFT_GENERIC)
-// :[ 'AUTO', 'ST7735', 'ST7789', 'ST7796', 'R61505', 'ILI9328', 'ILI9341', 'ILI9488' ]
-#define TFT_DRIVER AUTO
-
-// Interface. Enable one of the following options:
-//#define TFT_INTERFACE_FSMC
-//#define TFT_INTERFACE_SPI
-
-// TFT Resolution. Enable one of the following options:
-//#define TFT_RES_320x240
-//#define TFT_RES_480x272
-//#define TFT_RES_480x320
-#endif
-
-/**
- * TFT UI - User Interface Selection. Enable one of the following options:
- *
- *   TFT_CLASSIC_UI - Emulated DOGM - 128x64 Upscaled
- *   TFT_COLOR_UI   - Marlin Default Menus, Touch Friendly, using full TFT capabilities
- *   TFT_LVGL_UI    - A Modern UI using LVGL
- *
- *   For LVGL_UI also copy the 'assets' folder from the build directory to the
- *   root of your SD card, together with the compiled firmware.
- */
-//#define TFT_CLASSIC_UI
-//#define TFT_COLOR_UI
-//#define TFT_LVGL_UI
-
-/**
- * TFT Rotation. Set to one of the following values:
- *
- *   TFT_ROTATE_90,  TFT_ROTATE_90_MIRROR_X,  TFT_ROTATE_90_MIRROR_Y,
- *   TFT_ROTATE_180, TFT_ROTATE_180_MIRROR_X, TFT_ROTATE_180_MIRROR_Y,
- *   TFT_ROTATE_270, TFT_ROTATE_270_MIRROR_X, TFT_ROTATE_270_MIRROR_Y,
- *   TFT_MIRROR_X, TFT_MIRROR_Y, TFT_NO_ROTATION
- */
-//#define TFT_ROTATION TFT_NO_ROTATION
+//#define TFT_LVGL_UI_FSMC  // Robin nano v1.2 uses FSMC
+//#define TFT_LVGL_UI_SPI   // Robin nano v2.0 uses SPI
 
 //=============================================================================
 //============================  Other Controllers  ============================
@@ -2500,10 +2417,10 @@
 // Support for Adafruit NeoPixel LED driver
 //#define NEOPIXEL_LED
 #if ENABLED(NEOPIXEL_LED)
-#define NEOPIXEL_TYPE NEO_GRBW // NEO_GRBW / NEO_GRB - four/three channel driver type (defined in Adafruit_NeoPixel.h)
-#define NEOPIXEL_PIN 4         // LED driving pin
-//#define NEOPIXEL2_TYPE NEOPIXEL_TYPE
-//#define NEOPIXEL2_PIN    5
+#define NEOPIXEL_TYPE NEO_GRBW  // NEO_GRBW / NEO_GRB - four/three channel driver type (defined in Adafruit_NeoPixel.h)
+#define NEOPIXEL_PIN 4          // LED driving pin                     \
+                                //#define NEOPIXEL2_TYPE NEOPIXEL_TYPE \
+                                //#define NEOPIXEL2_PIN    5
 #define NEOPIXEL_PIXELS 30      // Number of LEDs in the strip. (Longest strip when NEOPIXEL2_SEPARATE is disabled.)
 #define NEOPIXEL_IS_SEQUENTIAL  // Sequential display for temperature change - LED by LED. Disable to change all LEDs at once.
 #define NEOPIXEL_BRIGHTNESS 127 // Initial brightness (0-255)

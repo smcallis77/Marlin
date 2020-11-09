@@ -395,7 +395,7 @@
  * The fan turns on automatically whenever any driver is enabled and turns
  * off (or reduces to idle speed) shortly after drivers are turned off.
  */
-//#define USE_CONTROLLER_FAN
+#define USE_CONTROLLER_FAN
 #if ENABLED(USE_CONTROLLER_FAN)
 //#define CONTROLLER_FAN_PIN -1        // Set a custom pin for the controller fan
 //#define CONTROLLER_FAN_USE_Z_ONLY    // With this option only the Z axis is considered
@@ -404,7 +404,7 @@
 #define CONTROLLERFAN_SPEED_ACTIVE 255 // (0-255) Active speed, used when any motor is enabled
 #define CONTROLLERFAN_SPEED_IDLE 0     // (0-255) Idle speed, used when motors are disabled
 #define CONTROLLERFAN_IDLE_TIME 60     // (seconds) Extra time to keep the fan running after disabling motors
-//#define CONTROLLER_FAN_EDITABLE      // Enable M710 configurable settings
+#define CONTROLLER_FAN_EDITABLE        // Enable M710 configurable settings
 #if ENABLED(CONTROLLER_FAN_EDITABLE)
 #define CONTROLLER_FAN_MENU // Enable the Controller Fan submenu
 #endif
@@ -658,7 +658,7 @@
 
 #define HOMING_BUMP_MM \
    {                   \
-      5, 5, 2          \
+      0, 0, 2          \
    } // (mm) Backoff from endstops after first bump
 #define HOMING_BUMP_DIVISOR \
    {                        \
@@ -821,11 +821,11 @@
 #define TRAMMING_POINT_NAME_3 "Back-Right"
 #define TRAMMING_POINT_NAME_4 "Back-Left"
 
-#define RESTORE_LEVELING_AFTER_G35 // Enable to restore leveling setup after operation
-                                   //#define REPORT_TRAMMING_MM          // Report Z deviation (mm) for each point relative to the first
+// Enable to restore leveling setup after operation
+#define RESTORE_LEVELING_AFTER_G35
 
-//#define ASSISTED_TRAMMING_MENU_ITEM // Add a menu item to run G35 Assisted Tramming (MarlinUI)
-//#define ASSISTED_TRAMMING_WIZARD    // Make the menu item open a Tramming Wizard sub-menu
+// Add a menu item for Assisted Tramming
+//#define ASSISTED_TRAMMING_MENU_ITEM
 
 /**
    * Screw thread:
@@ -990,7 +990,7 @@
 
 // Define the pin to read during calibration
 #ifndef CALIBRATION_PIN
-#define CALIBRATION_PIN -1              // Define here to override the default pin
+//#define CALIBRATION_PIN -1            // Define here to override the default pin
 #define CALIBRATION_PIN_INVERTING false // Set to true to invert the custom pin
 //#define CALIBRATION_PIN_PULLDOWN
 #define CALIBRATION_PIN_PULLUP
@@ -1120,16 +1120,13 @@
 #endif
 
 // Include a page of printer information in the LCD Main Menu
-//#define LCD_INFO_MENU
+#define LCD_INFO_MENU
 #if ENABLED(LCD_INFO_MENU)
 //#define LCD_PRINTER_INFO_IS_BOOTSCREEN // Show bootscreen(s) instead of Printer Info pages
 #endif
 
 // BACK menu items keep the highlight at the top
 //#define TURBO_BACK_MENU_ITEM
-
-// Add a mute option to the LCD menu
-//#define SOUND_MENU_ITEM
 
 /**
    * LED Control Menu
@@ -1194,9 +1191,9 @@
 #if ENABLED(LCD_PROGRESS_BAR)
 #define PROGRESS_BAR_BAR_TIME 2000 // (ms) Amount of time to show the bar
 #define PROGRESS_BAR_MSG_TIME 3000 // (ms) Amount of time to show the status message
-#define PROGRESS_MSG_EXPIRE 0      // (ms) Amount of time to retain the status message (0=forever)                    \
-                                   //#define PROGRESS_MSG_ONCE         // Show the message for MSG_TIME then clear it \
-                                   //#define LCD_PROGRESS_BAR_TEST     // Add a menu item to test the progress bar
+#define PROGRESS_MSG_EXPIRE 0      // (ms) Amount of time to retain the status message (0=forever)
+//#define PROGRESS_MSG_ONCE         // Show the message for MSG_TIME then clear it
+//#define LCD_PROGRESS_BAR_TEST     // Add a menu item to test the progress bar
 #endif
 #endif
 #endif
@@ -1207,7 +1204,7 @@
 // Enable this option and set to HIGH if your SD cards are incorrectly detected.
 //#define SD_DETECT_STATE HIGH
 
-//#define SDCARD_READONLY                 // Read-only SD card (to save over 2K of flash)
+#define SDCARD_READONLY // Read-only SD card (to save over 2K of flash)
 
 #define SD_PROCEDURE_DEPTH 1 // Increase if you need more nested M32 calls
 
@@ -1283,9 +1280,9 @@
 #define SDSORT_LIMIT 40          // Maximum number of sorted items (10-256). Costs 27 bytes each.
 #define FOLDER_SORTING -1        // -1=above  0=none  1=below
 #define SDSORT_GCODE false       // Allow turning sorting on/off with LCD and M34 G-code.
-#define SDSORT_USES_RAM false    // Pre-allocate a static array for faster pre-sorting.
+#define SDSORT_USES_RAM true     // Pre-allocate a static array for faster pre-sorting.
 #define SDSORT_USES_STACK false  // Prefer the stack for pre-sorting to give back some SRAM. (Negated by next 2 options.)
-#define SDSORT_CACHE_NAMES false // Keep sorted items in RAM longer for speedy performance. Most expensive option.
+#define SDSORT_CACHE_NAMES true  // Keep sorted items in RAM longer for speedy performance. Most expensive option.
 #define SDSORT_DYNAMIC_RAM false // Use dynamic allocation (within SD menus). Least expensive option. Set SDSORT_LIMIT before use!
 #define SDSORT_CACHE_VFATS 2     // Maximum number of 13-byte VFAT entries to use for sorting. \
                                  // Note: Only affects SCROLL_LONG_FILENAMES with SDSORT_CACHE_NAMES but not SDSORT_DYNAMIC_RAM.
@@ -1379,7 +1376,7 @@
    *
    * :[ 'LCD', 'ONBOARD', 'CUSTOM_CABLE' ]
    */
-//#define SDCARD_CONNECTION LCD
+#define SDCARD_CONNECTION ONBOARD
 
 #endif // SDSUPPORT
 
@@ -1601,9 +1598,10 @@
 #endif
 
 //
-// Classic UI Options
+// FSMC / SPI Graphical TFT
 //
 #if TFT_SCALED_DOGLCD
+//#define GRAPHICAL_TFT_ROTATE_180
 //#define TFT_MARLINUI_COLOR 0xFFFF // White
 //#define TFT_MARLINBG_COLOR 0x0000 // Black
 //#define TFT_DISABLED_COLOR 0x0003 // Almost black
@@ -1691,12 +1689,12 @@
  *
  * See https://marlinfw.org/docs/features/lin_advance.html for full instructions.
  */
-//#define LIN_ADVANCE
+#define LIN_ADVANCE
 #if ENABLED(LIN_ADVANCE)
 //#define EXTRA_LIN_ADVANCE_K // Enable for second linear advance constants
 #define LIN_ADVANCE_K 0.0 // Unit: mm compression per 1mm/s extruder speed
 //#define LA_DEBUG            // If enabled, this will generate debug information output over USB.
-//#define EXPERIMENTAL_SCURVE // Enable this option to permit S-Curve Acceleration
+#define EXPERIMENTAL_SCURVE // Enable this option to permit S-Curve Acceleration
 #endif
 
 // @section leveling
@@ -1844,10 +1842,10 @@
 //#define ARC_SEGMENTS_PER_R    1 // Max segment length, MM_PER = Min
 #define MIN_ARC_SEGMENTS 24 // Minimum number of segments in a complete circle
 //#define ARC_SEGMENTS_PER_SEC 50 // Use feedrate to choose segment length (with MM_PER_ARC_SEGMENT as the minimum)
-#define N_ARC_CORRECTION 25 // Number of interpolated segments between corrections                                    \
-                            //#define ARC_P_CIRCLES           // Enable the 'P' parameter to specify complete circles \
-                            //#define CNC_WORKSPACE_PLANES    // Allow G2/G3 to operate in XY, ZX, or YZ planes       \
-                            //#define SF_ARC_FIX              // Enable only if using SkeinForge with "Arc Point" fillet procedure
+#define N_ARC_CORRECTION 25 // Number of interpolated segments between corrections
+//#define ARC_P_CIRCLES           // Enable the 'P' parameter to specify complete circles
+//#define CNC_WORKSPACE_PLANES    // Allow G2/G3 to operate in XY, ZX, or YZ planes
+//#define SF_ARC_FIX              // Enable only if using SkeinForge with "Arc Point" fillet procedure
 #endif
 
 // Support for G5 with XYZE destination and IJPQ offsets. Requires ~2666 bytes.
@@ -1991,7 +1989,7 @@
  * Currently handles M108, M112, M410, M876
  * NOTE: Not yet implemented for all platforms.
  */
-//#define EMERGENCY_PARSER
+#define EMERGENCY_PARSER
 
 // Bad Serial-connections can miss a received command by sending an 'ok'
 // Therefore some clients abort after 30 seconds in a timeout.
@@ -2121,9 +2119,9 @@
    {                                 \
       X_MIN_POS + 10, Y_MIN_POS + 10 \
    }
-#define TOOLCHANGE_PARK_XY_FEEDRATE 6000 // (mm/min)                                                   \
-                                         //#define TOOLCHANGE_PARK_X_ONLY          // X axis only move \
-                                         //#define TOOLCHANGE_PARK_Y_ONLY          // Y axis only move
+#define TOOLCHANGE_PARK_XY_FEEDRATE 6000 // (mm/min)
+//#define TOOLCHANGE_PARK_X_ONLY          // X axis only move
+//#define TOOLCHANGE_PARK_Y_ONLY          // Y axis only move
 #endif
 #endif // HAS_MULTI_EXTRUDER
 
@@ -2175,10 +2173,10 @@
 #define FILAMENT_CHANGE_ALERT_BEEPS 10 // Number of alert beeps to play when a response is needed.
 #define PAUSE_PARK_NO_STEPPER_TIMEOUT  // Enable for XYZ steppers to stay powered on during filament change.
 
-#define PARK_HEAD_ON_PAUSE // Park the nozzle during pause and filament change.
-//#define HOME_BEFORE_FILAMENT_CHANGE           // If needed, home before parking for filament change
+#define PARK_HEAD_ON_PAUSE          // Park the nozzle during pause and filament change.
+#define HOME_BEFORE_FILAMENT_CHANGE // If needed, home before parking for filament change
 
-//#define FILAMENT_LOAD_UNLOAD_GCODES           // Add M701/M702 Load/Unload G-codes, plus Load/Unload in the LCD Prepare menu.
+#define FILAMENT_LOAD_UNLOAD_GCODES // Add M701/M702 Load/Unload G-codes, plus Load/Unload in the LCD Prepare menu.
 //#define FILAMENT_UNLOAD_ALL_EXTRUDERS         // Allow M702 to unload all extruders above a minimum target temp (as set by M302)
 #endif
 
@@ -2311,20 +2309,14 @@
 #if HAS_TRINAMIC_CONFIG
 
 #define HOLD_MULTIPLIER 0.5 // Scales down the holding current from run current
-
-/**
-   * Interpolate microsteps to 256
-   * Override for each driver with <driver>_INTERPOLATE settings below
-   */
-#define INTERPOLATE true
+#define INTERPOLATE true    // Interpolate X/Y/Z_MICROSTEPS to 256
 
 #if AXIS_IS_TMC(X)
-#define X_CURRENT 800            // (mA) RMS current. Multiply by 1.414 for peak current.
-#define X_CURRENT_HOME X_CURRENT // (mA) RMS current for sensorless homing
-#define X_MICROSTEPS 16          // 0..256
+#define X_CURRENT 580                  // (mA) RMS current. Multiply by 1.414 for peak current.
+#define X_CURRENT_HOME (X_CURRENT / 2) // (mA) RMS current for sensorless homing
+#define X_MICROSTEPS 16                // 0..256
 #define X_RSENSE 0.11
-#define X_CHAIN_POS -1 // -1..0: Not chained. 1: MCU MOSI connected. 2: Next in chain, ... \
-                       //#define X_INTERPOLATE  true      // Enable to override 'INTERPOLATE' for the X axis
+#define X_CHAIN_POS -1 // <=0 : Not chained. 1 : MCU MOSI connected. 2 : Next in chain, ...
 #endif
 
 #if AXIS_IS_TMC(X2)
@@ -2337,8 +2329,8 @@
 #endif
 
 #if AXIS_IS_TMC(Y)
-#define Y_CURRENT 800
-#define Y_CURRENT_HOME Y_CURRENT
+#define Y_CURRENT 580
+#define Y_CURRENT_HOME (Y_CURRENT / 2)
 #define Y_MICROSTEPS 16
 #define Y_RSENSE 0.11
 #define Y_CHAIN_POS -1
@@ -2351,16 +2343,14 @@
 #define Y2_MICROSTEPS 16
 #define Y2_RSENSE 0.11
 #define Y2_CHAIN_POS -1
-//#define Y2_INTERPOLATE true
 #endif
 
 #if AXIS_IS_TMC(Z)
-#define Z_CURRENT 800
+#define Z_CURRENT 580
 #define Z_CURRENT_HOME Z_CURRENT
 #define Z_MICROSTEPS 16
 #define Z_RSENSE 0.11
 #define Z_CHAIN_POS -1
-//#define Z_INTERPOLATE  true
 #endif
 
 #if AXIS_IS_TMC(Z2)
@@ -2369,7 +2359,6 @@
 #define Z2_MICROSTEPS 16
 #define Z2_RSENSE 0.11
 #define Z2_CHAIN_POS -1
-//#define Z2_INTERPOLATE true
 #endif
 
 #if AXIS_IS_TMC(Z3)
@@ -2378,7 +2367,6 @@
 #define Z3_MICROSTEPS 16
 #define Z3_RSENSE 0.11
 #define Z3_CHAIN_POS -1
-//#define Z3_INTERPOLATE true
 #endif
 
 #if AXIS_IS_TMC(Z4)
@@ -2387,11 +2375,10 @@
 #define Z4_MICROSTEPS 16
 #define Z4_RSENSE 0.11
 #define Z4_CHAIN_POS -1
-//#define Z4_INTERPOLATE true
 #endif
 
 #if AXIS_IS_TMC(E0)
-#define E0_CURRENT 800
+#define E0_CURRENT 650
 #define E0_MICROSTEPS 16
 #define E0_RSENSE 0.11
 #define E0_CHAIN_POS -1
@@ -2497,14 +2484,14 @@
    * on the same serial port, either here or in your board's pins file.
    */
 #define X_SLAVE_ADDRESS 0
-#define Y_SLAVE_ADDRESS 0
-#define Z_SLAVE_ADDRESS 0
+#define Y_SLAVE_ADDRESS 2
+#define Z_SLAVE_ADDRESS 1
 #define X2_SLAVE_ADDRESS 0
 #define Y2_SLAVE_ADDRESS 0
 #define Z2_SLAVE_ADDRESS 0
 #define Z3_SLAVE_ADDRESS 0
 #define Z4_SLAVE_ADDRESS 0
-#define E0_SLAVE_ADDRESS 0
+#define E0_SLAVE_ADDRESS 3
 #define E1_SLAVE_ADDRESS 0
 #define E2_SLAVE_ADDRESS 0
 #define E3_SLAVE_ADDRESS 0
@@ -2542,26 +2529,10 @@
    * CHOPPER_PRUSAMK3_24V // Imported parameters from the official Průša firmware for MK3 (24V)
    * CHOPPER_MARLIN_119   // Old defaults from Marlin v1.1.9
    *
-   * Define your own with:
+  * Define you own with
    * { <off_time[1..15]>, <hysteresis_end[-3..12]>, hysteresis_start[1..8] }
    */
-#define CHOPPER_TIMING CHOPPER_DEFAULT_12V // All axes (override below)                                                        \
-                                           //#define CHOPPER_TIMING_X  CHOPPER_DEFAULT_12V   // For X Axes (override below)    \
-                                           //#define CHOPPER_TIMING_X2 CHOPPER_DEFAULT_12V                                     \
-                                           //#define CHOPPER_TIMING_Y  CHOPPER_DEFAULT_12V   // For Y Axes (override below)    \
-                                           //#define CHOPPER_TIMING_Y2 CHOPPER_DEFAULT_12V                                     \
-                                           //#define CHOPPER_TIMING_Z  CHOPPER_DEFAULT_12V   // For Z Axes (override below)    \
-                                           //#define CHOPPER_TIMING_Z2 CHOPPER_DEFAULT_12V                                     \
-                                           //#define CHOPPER_TIMING_Z3 CHOPPER_DEFAULT_12V                                     \
-                                           //#define CHOPPER_TIMING_Z4 CHOPPER_DEFAULT_12V                                     \
-                                           //#define CHOPPER_TIMING_E  CHOPPER_DEFAULT_12V   // For Extruders (override below) \
-                                           //#define CHOPPER_TIMING_E1 CHOPPER_DEFAULT_12V                                     \
-                                           //#define CHOPPER_TIMING_E2 CHOPPER_DEFAULT_12V                                     \
-                                           //#define CHOPPER_TIMING_E3 CHOPPER_DEFAULT_12V                                     \
-                                           //#define CHOPPER_TIMING_E4 CHOPPER_DEFAULT_12V                                     \
-                                           //#define CHOPPER_TIMING_E5 CHOPPER_DEFAULT_12V                                     \
-                                           //#define CHOPPER_TIMING_E6 CHOPPER_DEFAULT_12V                                     \
-                                           //#define CHOPPER_TIMING_E7 CHOPPER_DEFAULT_12V
+#define CHOPPER_TIMING CHOPPER_DEFAULT_24V
 
 /**
    * Monitor Trinamic drivers
@@ -2637,16 +2608,16 @@
 
 #if EITHER(SENSORLESS_HOMING, SENSORLESS_PROBING)
 // TMC2209: 0...255. TMC2130: -64...63
-#define X_STALL_SENSITIVITY 8
+#define X_STALL_SENSITIVITY 75
 #define X2_STALL_SENSITIVITY X_STALL_SENSITIVITY
-#define Y_STALL_SENSITIVITY 8
+#define Y_STALL_SENSITIVITY 75
 #define Y2_STALL_SENSITIVITY Y_STALL_SENSITIVITY
 //#define Z_STALL_SENSITIVITY  8
 //#define Z2_STALL_SENSITIVITY Z_STALL_SENSITIVITY
 //#define Z3_STALL_SENSITIVITY Z_STALL_SENSITIVITY
 //#define Z4_STALL_SENSITIVITY Z_STALL_SENSITIVITY
 //#define SPI_ENDSTOPS              // TMC2130 only
-//#define IMPROVE_HOMING_RELIABILITY
+#define IMPROVE_HOMING_RELIABILITY
 #endif
 
 /**
@@ -2992,12 +2963,6 @@
 
 #define SPINDLE_LASER_FREQUENCY 2500 // (Hz) Spindle/laser frequency (only on supported HALs: AVR and LPC)
 
-//#define SPINDLE_SERVO         // A servo converting an angle to spindle power
-#ifdef SPINDLE_SERVO
-#define SPINDLE_SERVO_NR 0   // Index of servo used for spindle control
-#define SPINDLE_SERVO_MIN 10 // Minimum angle for servo spindle
-#endif
-
 /**
    * Speed / Power can be set ('M3 S') and displayed in terms of:
    *  - PWM255  (S0 - S255)
@@ -3054,7 +3019,7 @@
      * This allows the laser to keep in perfect sync with the planner and removes
      * the powerup/down delay since lasers require negligible time.
      */
-//#define LASER_POWER_INLINE
+#define LASER_POWER_INLINE
 
 #if ENABLED(LASER_POWER_INLINE)
 /**
