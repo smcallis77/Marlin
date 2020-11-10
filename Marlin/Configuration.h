@@ -347,7 +347,7 @@
 //#define PSU_NAME "Power Supply"
 
 #if ENABLED(PSU_CONTROL)
-#define PSU_ACTIVE_STATE LOW // Set 'LOW' for ATX, 'HIGH' for X-Box
+#define PSU_ACTIVE_STATE HIGH // Set 'LOW' for ATX, 'HIGH' for X-Box
 
 #define PSU_DEFAULT_OFF       // Keep power off until enabled directly with M80
 #define PSU_POWERUP_DELAY 250 // (ms) Delay for the PSU to warm up to full power
@@ -1218,8 +1218,8 @@
 #if ENABLED(FILAMENT_RUNOUT_SENSOR)
 #define FIL_RUNOUT_ENABLED_DEFAULT true // Enable the sensor on startup. Override with M412 followed by M500.
 #define NUM_RUNOUT_SENSORS 1            // Number of sensors, up to one per extruder. Define a FIL_RUNOUT#_PIN for each.
-#define FIL_RUNOUT_STATE LOW            // Pin state indicating that filament is NOT present.
-#define FIL_RUNOUT_PULLUP               // Use internal pullup for filament runout pins.
+#define FIL_RUNOUT_STATE HIGH           // Pin state indicating that filament is NOT present.
+#define FIL_RUNOUT_PULLUP               // Use internal pullup for filament runout pins. \
                                         //#define FIL_RUNOUT_PULLDOWN           // Use internal pulldown for filament runout pins.
 
 // Set one or more commands to execute on filament runout.
