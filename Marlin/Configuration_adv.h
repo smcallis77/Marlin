@@ -3326,7 +3326,7 @@
 #if ENABLED(HOST_ACTION_COMMANDS)
 #define ACTION_ON_PAUSE "pause"
 #define ACTION_ON_RESUME "resume"
-//#define HOST_PROMPT_SUPPORT
+#define HOST_PROMPT_SUPPORT
 //#define HOST_START_MENU_ITEM  // Add a menu item that tells the host to start
 #endif
 
