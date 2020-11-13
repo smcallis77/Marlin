@@ -2151,7 +2151,7 @@
                                              // 0 to disable start loading and skip to fast load only
 #define FILAMENT_CHANGE_FAST_LOAD_FEEDRATE 25 // (mm/s) Load filament feedrate. This can be pretty fast.
 #define FILAMENT_CHANGE_FAST_LOAD_ACCEL 25    // (mm/s^2) Lower acceleration may allow a faster feedrate.
-#define FILAMENT_CHANGE_FAST_LOAD_LENGTH 300  // (mm) Load length of filament, from extruder gear to nozzle. \
+#define FILAMENT_CHANGE_FAST_LOAD_LENGTH 280  // (mm) Load length of filament, from extruder gear to nozzle. \
                                              //   For Bowden, the full length of the tube and nozzle.       \
                                              //   For direct drive, the full length of the nozzle.
 //#define ADVANCED_PAUSE_CONTINUOUS_PURGE       // Purge continuously up to the purge length until interrupted.
@@ -3322,8 +3322,10 @@
  * Host Prompt Support enables Marlin to use the host for user prompts so
  * filament runout and other processes can be managed from the host side.
  */
-//#define HOST_ACTION_COMMANDS
+#define HOST_ACTION_COMMANDS
 #if ENABLED(HOST_ACTION_COMMANDS)
+#define ACTION_ON_PAUSE "pause"
+#define ACTION_ON_RESUME "resume"
 //#define HOST_PROMPT_SUPPORT
 //#define HOST_START_MENU_ITEM  // Add a menu item that tells the host to start
 #endif
