@@ -131,7 +131,7 @@
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "SKR-BL V2.0 512K 291120"
+#define CUSTOM_MACHINE_NAME "SKR-BL V2.0 Matrix 512K 240221"
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
@@ -422,7 +422,7 @@
  *   998 : Dummy Table that ALWAYS reads 25°C or the temperature defined below.
  *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
  */
-#define TEMP_SENSOR_0 1
+#define TEMP_SENSOR_0 5
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
@@ -472,7 +472,7 @@
 // Above this temperature the heater will be switched off.
 // This can protect components from overheating, but NOT from shorts and failures.
 // (Use MINTEMP for thermistor short/failure protection.)
-#define HEATER_0_MAXTEMP 275
+#define HEATER_0_MAXTEMP 315
 #define HEATER_1_MAXTEMP 275
 #define HEATER_2_MAXTEMP 275
 #define HEATER_3_MAXTEMP 275
@@ -516,9 +516,9 @@
     76.55, 76.55        \
   }
 #else
-#define DEFAULT_Kp 21.73
-#define DEFAULT_Ki 1.54
-#define DEFAULT_Kd 76.55
+#define DEFAULT_Kp 22.9187
+#define DEFAULT_Ki 1.8202
+#define DEFAULT_Kd 72.1422
 #endif
 #endif // PIDTEMP
 
@@ -588,7 +588,7 @@
  * Note: For Bowden Extruders make this large enough to allow load/unload.
  */
 #define PREVENT_LENGTHY_EXTRUDE
-#define EXTRUDE_MAXLENGTH 700
+#define EXTRUDE_MAXLENGTH 150
 
 //===========================================================================
 //======================== Thermal Runaway Protection =======================
@@ -761,7 +761,7 @@
  */
 #define DEFAULT_AXIS_STEPS_PER_UNIT \
   {                                 \
-    80, 80, 400, 104.38             \
+    80, 80, 400, 333.3              \
   }
 
 /**
@@ -1024,7 +1024,7 @@
  */
 #define NOZZLE_TO_PROBE_OFFSET \
   {                            \
-    -60, -13, -1.38            \
+    -37, 1, -1.53              \
   }
 
 // Most probes should stay away from the edges of the bed, but
@@ -1032,7 +1032,7 @@
 #define PROBING_MARGIN 10
 
 // X and Y axis travel speed (mm/min) between probes
-#define XY_PROBE_SPEED (133 * 60)
+#define XY_PROBE_SPEED (200 * 60)
 
 // Feedrate (mm/min) for the first approach when double-probing (MULTIPLE_PROBING == 2)
 #define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
@@ -1132,7 +1132,7 @@
 // @section extruder
 
 // For direct drive extruder v9 set to true, for geared extruder set to false.
-#define INVERT_E0_DIR true
+#define INVERT_E0_DIR false
 #define INVERT_E1_DIR false
 #define INVERT_E2_DIR false
 #define INVERT_E3_DIR false
@@ -1162,11 +1162,11 @@
 
 // The size of the print bed
 #define X_BED_SIZE 230
-#define Y_BED_SIZE 230
+#define Y_BED_SIZE 220
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
-#define X_MIN_POS 0
-#define Y_MIN_POS 0
+#define X_MIN_POS -5
+#define Y_MIN_POS -15
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
@@ -1355,7 +1355,7 @@
 #if EITHER(AUTO_BED_LEVELING_LINEAR, AUTO_BED_LEVELING_BILINEAR)
 
 // Set the number of grid points per dimension.
-#define GRID_MAX_POINTS_X 4
+#define GRID_MAX_POINTS_X 5
 #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
 // Probe along the Y axis, advancing X after each column
@@ -1450,7 +1450,7 @@
 // Manually set the home position. Leave these undefined for automatic settings.
 // For DELTA this is the top-center of the Cartesian print volume.
 //#define MANUAL_X_HOME_POS 0
-#define MANUAL_Y_HOME_POS -9
+//#define MANUAL_Y_HOME_POS 0
 //#define MANUAL_Z_HOME_POS 0
 
 // Use "Z Safe Homing" to avoid homing with a Z probe outside the bed area.
